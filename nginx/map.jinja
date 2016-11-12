@@ -1,0 +1,22 @@
+# -*- coding: utf-8 -*-
+# vim: ft=jinja
+
+{% import_yaml 'nginx/defaults.yml' as defaults %}
+{% import_yaml 'nginx/osmap.yml' as osmap %}
+
+{# get the settings for the os_family grain #}
+{% set osfam = salt['grains.filter_by'](osmap) or {} %}
+
+{# merge the os family/codename specific data over the defaults #}
+{% do defaults.nginx.update(osfam) %}
+
+{# merge the pillar:lookup dict into the defaults/os specific dict #}
+{% set lookup = salt['pillar.get']('nginx:lookup',
+                                   default=defaults.nginx,
+                                   merge=True) %}
+
+{# merge the actual nginx pillar into the above combined dict #}
+{% set nginx = salt['pillar.get']('nginx', default=lookup, merge=True) %}
+
+{# prepend |nginx.platform_config| to |nginx.config| #}
+{% do nginx.update({'config': nginx.platform_config + nginx.config}) %}

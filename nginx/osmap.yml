@@ -1,0 +1,22 @@
+Debian:
+  package: nginx
+  service: nginx
+  user: www-data
+  config_directory: /etc/nginx
+  pid_file: /run/nginx.pid
+
+Debian:
+  package: www-servers/nginx
+  service: nginx
+  user: www-data
+  config_directory: /etc/nginx
+
+FreeBSD:
+  package: nginx
+  service: nginx
+  user: www
+  config_directory: /usr/local/etc/nginx
+  pid_file: /var/run/nginx.pid
+  platform_config:
+    - load_module: /usr/local/libexec/nginx/ngx_mail_module.so
+    - load_module: /usr/local/libexec/nginx/ngx_stream_module.so
