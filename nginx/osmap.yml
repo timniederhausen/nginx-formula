@@ -5,7 +5,7 @@ Debian:
   config_directory: /etc/nginx
   pid_file: /run/nginx.pid
 
-Debian:
+Gentoo:
   package: www-servers/nginx
   service: nginx
   user: www-data
