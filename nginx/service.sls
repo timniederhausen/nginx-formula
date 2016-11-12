@@ -12,5 +12,5 @@ nginx_service:
     - enable: {{ nginx.service_enabled }}
     - require:
       - sls: nginx.pkg
-    - listen:
+    - watch:
       - pkg: nginx_install
