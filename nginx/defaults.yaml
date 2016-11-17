@@ -19,4 +19,4 @@ nginx:
         - include: mime.types
         - include: 'conf.d/*.conf'
         - include: 'sites/*.conf'
-  servers: []
+  servers: {}
