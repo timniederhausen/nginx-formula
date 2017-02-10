@@ -19,4 +19,5 @@ nginx:
         - include: mime.types
         - include: 'conf.d/*.conf'
         - include: 'sites/*.conf'
+  platform_config: []
   servers: {}

@@ -24,12 +24,12 @@ nginx_dhparam:
 
 nginx_confd:
   file.directory:
-    - name: /usr/local/etc/nginx/conf.d
+    - name: {{ nginx.config_directory }}/conf.d
 
 {% if nginx.ssl_enabled %}
 nginx_ssl_conf:
   file.managed:
-    - name: /usr/local/etc/nginx/conf.d/ssl.conf
+    - name: {{ nginx.config_directory }}/conf.d/ssl.conf
     - source: salt://nginx/files/ssl.conf
     - template: jinja
     - context:
